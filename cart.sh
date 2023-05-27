@@ -5,7 +5,7 @@ echo -e "\e[32m Install nodejs \e[0m"
 yum install nodejs -y &>>/tmp/logs
 
 echo -e "\e[32m Creating roboshop cart \e[0m"
-cartadd roboshop &>>/tmp/logs
+useradd roboshop &>>/tmp/logs
 
 echo -e "\e[32m Creating app directory \e[0m"
 rm -rf /app &>>/tmp/logs
