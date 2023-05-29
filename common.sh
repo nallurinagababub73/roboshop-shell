@@ -12,7 +12,6 @@ nodejs() {
 
   app_presetup
   npm_dep
-  mongodb_schema
   systemd_setup
 }
 
