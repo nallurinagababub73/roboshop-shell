@@ -56,3 +56,28 @@ npm_dep() {
   cd ${project_dir} &>>${log_path}
   npm install &>>${log_path}
 }
+
+maven() {
+  echo -e "${col} Installing maven ${nocol}"
+  yum install maven -y &>>${log_path}
+
+  app_presetup
+  maven_dep
+  systemd_setup
+}
+maven_dep() {
+  echo -e "${col} Downloading dependencies ${nocol}"
+  cd ${project_dir} &>>${log_path}
+  mvn clean package  &>>${log_path}
+  mv target/${component}-1.0.jar ${component}.jar &>>${log_path}
+}
+
+mysql_schema() {
+  echo -e "${col} Installing mysql ${nocol}"
+  yum install mysql -y &>>${log_path}
+
+  echo -e "${col} Schema loading ${nocol}"
+  mysql -h mysql-dev.devopshemasri.online -uroot -pRoboShop@1 <${project_dir}/schema/${component}.sql &>>${log_path}
+
+}
+
