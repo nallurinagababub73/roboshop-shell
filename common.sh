@@ -80,4 +80,18 @@ mysql_schema() {
   mysql -h mysql-dev.devopshemasri.online -uroot -pRoboShop@1 <${project_dir}/schema/${component}.sql &>>${log_path}
 
 }
+python() {
+  echo -e "${col} Installing Python ${nocol}"
+  yum install python36 gcc python3-devel -y &>>${log_path}
+
+  app_presetup
+  python_dep
+  systemd_setup
+
+}
+python_dep() {
+  echo -e "${col} Downloading dependencies ${nocol}"
+  cd ${project_dir}
+  pip3.6 install -r requirements.txt &>>${log_path}
+}
 
